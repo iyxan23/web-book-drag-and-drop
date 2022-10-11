@@ -1,0 +1,254 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+
+* {
+    font-family: 'Lato', sans-serif;
+    user-select: none;
+}
+
+html, body {
+    padding: 0;
+    margin: 0;
+
+    overflow: hidden;
+}
+
+#drag-feedback {
+    pointer-events: none;
+
+    translate: -9999px -9999px;
+
+    position: absolute;
+    z-index: 10;
+
+    transition-property: scale, opacity, filter;
+    transition-duration: 100ms;
+    transition-timing-function: ease-in-out;
+}
+
+#drag-feedback.dragging {
+    scale: 1.25;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+
+    padding: 0 20rem;
+    height: 100%;
+
+    background-color: #9C611C;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 2.5rem;
+}
+
+.rak {
+    width: 100%;
+}
+
+.rak > h4 {
+    margin-top: 0;
+
+    color: white;
+    font-size: 16pt;
+}
+
+.rak > #books {
+    min-height: 10rem;
+
+    padding: 1rem;
+
+    background: #F7F7F7;
+    box-shadow: inset 0 0 5rem rgba(0, 0, 0, 0.25);
+    border-radius: 25px;
+
+    position: relative;
+
+    display: flex;
+    gap: 1rem;
+}
+
+.rak > #books > #add-button {
+    position: absolute;
+
+    top: calc(50% - 1rem);
+    right: 2rem;
+
+    cursor: pointer;
+}
+
+.rak > #books > #book-placeholder {
+    display: none;
+    pointer-events: none;
+}
+
+.book {
+    display: flex;
+    background-color: none;
+    
+    background: #AFC289;
+    border-radius: 25px;
+}
+
+.book > #cover {
+    width: 3rem;
+
+    background: #829460;
+    border: solid 2px #829460;
+    border-radius: 25px;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+}
+
+.book > #cover::after {
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.25);
+    height: 1rem;
+}
+
+.book > #cover > #title {
+    writing-mode: vertical-lr;
+    color: white;
+}
+
+.book > #content {
+    display: none;
+    padding: 1.5rem;
+    color: white;
+
+    flex-direction: column;
+}
+
+.book > #content > #title {
+    font-size: 1.5em;
+    font-weight: 700;
+}
+
+.book > #content > #author {
+    font-size: 1em;
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.book > #content > #year {
+    margin-top: auto;
+    align-self: flex-end;
+}
+
+.book > #content.show {
+    display: flex;
+}
+
+.book.dragged {
+    background: none;
+    border: dashed 2px gray;
+}
+
+.book.dragged > #cover {
+    background: none;
+    border: none;
+}
+
+.book.dragged:not(#book-placeholder) {
+    background: rgba(0, 0, 0, 0.25);
+}
+
+.book.dragged > #cover > #title {
+    visibility: hidden;
+}
+
+.book.dragged > #content {
+    visibility: hidden;
+}
+
+/* add book modal */
+#add-book-modal {
+    position: absolute;
+
+    width: 100vw;
+    height: 100vh;
+
+    background-color: rgba(0, 0, 0, 0.25);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 100;
+
+    transition: opacity 500ms ease-in-out;
+}
+
+#add-book-modal.hide {
+    opacity: 0;
+    pointer-events: none;
+}
+
+#add-book-modal.hide #modal {
+    scale: 0.75;
+}
+
+#modal {
+    display: flex;
+    flex-direction: column;
+
+    scale: 1;
+
+    padding: 3.5rem;
+    background-color: white;
+    box-shadow: 0px 4px 50px rgba(0, 0, 0, 0.25);
+    border-radius: 25px;
+
+    transition: scale 600ms ease-in-out;
+}
+
+#modal > h2 {
+    text-align: center;
+}
+
+#modal > #form {
+    width: 100%;
+
+    margin-bottom: 2.5rem;
+}
+
+#modal > #submit {
+    text-align: center;
+    padding: 1rem;
+
+    color: white;
+
+    background: #2A9EF2;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 25px;
+
+    cursor: pointer;
+}
+
+#modal > #submit:hover {
+    background: #2083cb;
+}
+/* add book modal */
+
+#trash {
+    position: fixed;
+    bottom: 3rem;
+    left: 3rem;
+
+    translate: 0 10rem;
+    transition: translate 500ms ease-in-out;
+}
+
+#trash.show {
+    translate: 0 0;
+}
+
+@media (max-width: 1024px) {
+    main {
+        padding: 0 10rem;
+    }
+}
