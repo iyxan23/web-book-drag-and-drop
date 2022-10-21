@@ -61,7 +61,7 @@ function tambahBuku(type) {
 function dragOverTrash(e) {
     if (!e.dataTransfer.types.includes("book-id")) { return; }
 
-    dragFeedback.style.filter = "hue-rotate(260deg)";
+    dragFeedback.style.filter = "hue-rotate(130deg)";
     dragFeedback.style.opacity = "0.75";
     dragFeedback.style.scale = "0.9";
 
